@@ -2,7 +2,7 @@
 
 ScanDesk Desktop replaces PaperPort in a small medical office: scan, print-to-ScanDesk, file, find, clean up, annotate and send documents. Everything stays on your PC; nothing is uploaded. Source code is private; this page holds the installers.
 
-**Current version: 0.6.6** (released 2026-11-02)
+**Current version: 0.6.7** (released 2026-11-02)
 
 ## Install (Windows 10/11, 64-bit)
 
@@ -16,18 +16,21 @@ Help > Copy logs for support writes the logs (file names and actions only, never
 
 ## Release notes
 
-## 0.6.6 - Beta feedback: arrival order, quiet mode, a selection error (2026-11-02)
-- The desktop now keeps documents in the order they arrived, oldest first, so a new scan lands at the end as in
-  PaperPort. Existing installs that still had the alphabetical default are switched once; Arrange items > by Name
-  brings the alphabet back. With Auto Arrange off, a document without a saved place is put after the last one, never
-  into a gap you left on purpose.
-- File > Options > **Quiet mode**: one tick leaves your scans alone: no background reading (OCR), no suggested names, no
-  Smart Assistant pane. Scan, look, rename by hand; search then finds names only. Untick to turn everything back on.
-- Fixed: clicking a document could show "Something went wrong: An item with the same key has already been added"
-  after the folder listing had been rebuilt (seen on the OFC laptop). The selection is now dropped and restored around
-  a rebuild, and a stale selection entry is recovered quietly instead of shown as an error.
-- Old PaperPort .max files (the format from before PaperPort switched to PDF) are counted when a folder is added
-  (Folder Manager, PaperPort import) and on request (File > Find old PaperPort .max files). ScanDesk cannot read
-  them; the message explains how to convert them without loss in PaperPort itself (select, Save As, PDF image).
-- The welcome tip now says how to rename (click the name of a selected document, or F2), how to arrange and group
-  documents, and where quiet mode is.
+## 0.6.7 - Beta feedback: icons stay put, unstack a page, send feedback (2026-11-02)
+- A document dropped anywhere on the desktop stays there. Auto Arrange is now off by default (switched off once for
+  existing installs); View > Arrange items > Auto Arrange turns the fixed order back on. Folders with more than 600
+  documents keep the fixed order.
+- Unstack a page, as in PaperPort: in the viewer, select pages and press **Unstack page** (they become documents of
+  their own next to the original, which keeps the rest; a version is saved); on the desktop, flip the thumbnail to a
+  page and right-click > **Unstack the shown page**. **Unstack** on a multi-page document makes every page its own
+  document and moves the original to the Recycle Bin.
+- Old PaperPort .max files: File > **Convert old PaperPort .max files** converts them to PDF through PaperPort's own
+  console converter (cvmaxpdf_console.exe, part of PaperPort 14, found on the PC by itself): one file per process so a
+  crash or hang on one file cannot stop the batch, every PDF checked before it is accepted, page images kept exactly
+  as they are (no MRC), PaperPort annotations carried over, the .max originals moved into a hidden "_MAX originals
+  (converted)" subfolder (or left in place, or recycled, as you choose), progress with time left, Stop at any time.
+  The message that appears when a folder with .max files is added offers the same. On a PC without PaperPort the
+  message says where the converter is.
+- Help > **Send feedback**: your message plus, if ticked, a zip of the logs on your Windows desktop (file names,
+  actions and settings only, never document contents), handed to your mail program (private) or to a new issue on
+  the GitHub releases page (public; needs a GitHub account). Nothing is sent until you press Send there.
