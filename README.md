@@ -2,7 +2,7 @@
 
 ScanDesk Desktop replaces PaperPort in a small medical office: scan, print-to-ScanDesk, file, find, clean up, annotate and send documents. Everything stays on your PC; nothing is uploaded. Source code is private; this page holds the installers.
 
-**Current version: 0.6.7** (released 2026-11-02)
+**Current version: 0.7.0** (released 2026-11-02)
 
 ## Install (Windows 10/11, 64-bit)
 
@@ -16,21 +16,13 @@ Help > Copy logs for support writes the logs (file names and actions only, never
 
 ## Release notes
 
-## 0.6.7 - Beta feedback: icons stay put, unstack a page, send feedback (2026-11-02)
-- A document dropped anywhere on the desktop stays there. Auto Arrange is now off by default (switched off once for
-  existing installs); View > Arrange items > Auto Arrange turns the fixed order back on. Folders with more than 600
-  documents keep the fixed order.
-- Unstack a page, as in PaperPort: in the viewer, select pages and press **Unstack page** (they become documents of
-  their own next to the original, which keeps the rest; a version is saved); on the desktop, flip the thumbnail to a
-  page and right-click > **Unstack the shown page**. **Unstack** on a multi-page document makes every page its own
-  document and moves the original to the Recycle Bin.
-- Old PaperPort .max files: File > **Convert old PaperPort .max files** converts them to PDF through PaperPort's own
-  console converter (cvmaxpdf_console.exe, part of PaperPort 14, found on the PC by itself): one file per process so a
-  crash or hang on one file cannot stop the batch, every PDF checked before it is accepted, page images kept exactly
-  as they are (no MRC), PaperPort annotations carried over, the .max originals moved into a hidden "_MAX originals
-  (converted)" subfolder (or left in place, or recycled, as you choose), progress with time left, Stop at any time.
-  The message that appears when a folder with .max files is added offers the same. On a PC without PaperPort the
-  message says where the converter is.
-- Help > **Send feedback**: your message plus, if ticked, a zip of the logs on your Windows desktop (file names,
-  actions and settings only, never document contents), handed to your mail program (private) or to a new issue on
-  the GitHub releases page (public; needs a GitHub account). Nothing is sent until you press Send there.
+## 0.7.0 - Ask in plain words (2026-11-02)
+- Natural-language search. In the Find group choose **Ask in plain words** and describe the document: "the eye clinic
+  lease from two years ago", "what do I owe the cable company", "patient sent for cataract assessment". ScanDesk
+  compares the meaning of your words with the meaning of every document's text, not just the words themselves, and
+  lists the best matches first with how well each matches. Time hints in the question ("two years ago", "March 2025",
+  "last year") narrow the dates.
+- The meaning index is built in the background by a small language model that ships with ScanDesk
+  (all-MiniLM-L6-v2, 23 MB) and runs on this PC; nothing leaves the computer. The status bar shows "Meaning index: n of
+  m" until every document that has text is covered; questions work from the first minute on what is covered so far.
+- File > Options > "Natural-language search" turns the index off (quiet mode turns it off too).
