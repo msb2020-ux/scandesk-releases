@@ -2,7 +2,7 @@
 
 ScanDesk Desktop replaces PaperPort in a small medical office: scan, print-to-ScanDesk, file, find, clean up, annotate and send documents. Everything stays on your PC; nothing is uploaded. Source code is private; this page holds the installers.
 
-**Current version: 0.6.0** (released 2026-11-01)
+**Current version: 0.6.1** (released 2026-11-02)
 
 ## Install (Windows 10/11, 64-bit)
 
@@ -16,16 +16,18 @@ Help > Copy logs for support writes the logs (file names and actions only, never
 
 ## Release notes
 
-## 0.6.0 - Tabbed viewer, pages between tabs, side-by-side compare, saved workspaces (2026-11-01)
-- One viewer window with a tab per document. Opening a document that is already open selects its tab. Ctrl+W
-  closes a tab, Ctrl+Tab switches, the last tab closes the window; every tab gets the usual save prompt.
-- Drag pages from one tab's page strip to another tab (or another viewer window): they are copied there (the
-  source keeps them; delete them there to move). Dragging within a tab still reorders.
-- Compare (Ctrl+Shift+D in the viewer): a second document on the right, chosen from the open tabs or any file; each
-  side has its own zoom, page and tools.
-- View > Workspaces: save the current arrangement (open folder, split pane, view, thumbnail size, sort order,
-  assistant, Send To bar) under a name and bring it back with one click.
-- Help > Invite a tester by email: opens your mail program with the beta-program page, the permanent installer link
-  (GitHub Releases, latest version) and the three install steps. The releases page now carries ScanDesk-Setup.msi
-  (constant name) and ScanDesk-Trust-Publisher.zip, and its README is the tester page, rewritten at every release.
-- A build run from a source tree can run beside the installed ScanDesk (separate single-instance scope).
+## 0.6.1 - Folder Manager, update prompt in the middle of the window (2026-11-02)
+- File > Folder Manager (also on the Organize ribbon and in the folder tree's right-click menu): the top-level folders
+  of the desktop in one list, like PaperPort's Folder Manager. **Add...** puts a folder that already holds documents
+  (OneDrive, a network share, any folder on this PC) on the desktop under a name of your choice; the documents stay
+  where they are and are read and edited in place, nothing is moved or copied. **Remove** takes a linked folder off
+  the desktop (documents untouched); **Rename...**, **Move Up / Move Down** (the order is kept and shown in the tree),
+  **New folder...**, **PaperPort folders...** (the registry import) and **Open in Explorer**. The bottom line shows where
+  the selected folder's documents are.
+- The update question at startup now opens in the middle of the window ("ScanDesk Desktop x.y.z is ready to
+  install. Install it now?" with the release notes, Install now / Later) instead of a small corner toast. It waits for
+  the first-start prompts and never opens on top of another dialog. A tray (hidden) start still gets the toast.
+- Bring in PaperPort folders: a locked OneDrive Personal Vault can be ticked and linked (it was greyed out).
+- Renaming a folder keeps its color.
+- For testers and support: the environment variable SCANDESK_DATA_DIR moves settings, links, index, cache and logs
+  under one folder, so a second copy can run beside the installed one without sharing its data.
