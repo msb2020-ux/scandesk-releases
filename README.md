@@ -2,7 +2,7 @@
 
 ScanDesk Desktop replaces PaperPort in a small medical office: scan, print-to-ScanDesk, file, find, clean up, annotate and send documents. Everything stays on your PC; nothing is uploaded. Source code is private; this page holds the installers.
 
-**Current version: 0.7.3** (released 2026-11-02)
+**Current version: 0.8.0** (released 2026-11-02)
 
 ## Install (Windows 10/11, 64-bit)
 
@@ -16,7 +16,15 @@ Help > Copy logs for support writes the logs (file names and actions only, never
 
 ## Release notes
 
-## 0.7.3 - The desktop reopens as you left it (2026-11-02)
-- ScanDesk reopens in the folder you were in, with every folder of the tree that was open still open. The last folder
-  and the tree's shape are saved two seconds after each change, so they survive a crash or a forced close (until now
-  they were written only on a normal exit, which is why a killed ScanDesk came back in the wrong place).
+## 0.8.0 - Modern look, with Classic one click away (2026-11-02)
+- View > Appearance > **Modern (Windows 11 look)**: ScanDesk draws its own title bar (icon, name, minimize / maximize /
+  close), the ribbon becomes a command bar (tab pills, one row of icon-and-label buttons, no group captions), documents
+  sit on cards, the Send To bar floats as a rounded dock, controls have rounded corners and the text uses Segoe UI
+  Variable. Everything is in the same place and every command works the same; only the look changes.
+- **Classic** stays the default and is what every existing install keeps: the PaperPort-like ribbon with group captions
+  and the standard Windows title bar, exactly as before. Switch back and forth at any time; the change is immediate in
+  every open window, no restart. The ribbon's Organize > Theme button offers both looks too.
+- Picking Modern while the Light blue colors are on switches the colors to Light gray (the neutral palette the look
+  is designed for); View > Theme changes them back. Dark works with both looks.
+- Dark theme: the folder tree's names are drawn in the theme's text color (they were dark gray on dark); Windows'
+  title bars of the Classic look and of every dialog turn dark with the theme.
