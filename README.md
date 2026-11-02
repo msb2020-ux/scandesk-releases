@@ -2,7 +2,7 @@
 
 ScanDesk Desktop replaces PaperPort in a small medical office: scan, print-to-ScanDesk, file, find, clean up, annotate and send documents. Everything stays on your PC; nothing is uploaded. Source code is private; this page holds the installers.
 
-**Current version: 0.6.4** (released 2026-11-02)
+**Current version: 0.6.5** (released 2026-11-02)
 
 ## Install (Windows 10/11, 64-bit)
 
@@ -16,18 +16,14 @@ Help > Copy logs for support writes the logs (file names and actions only, never
 
 ## Release notes
 
-## 0.6.4 - Filing rules with preview and undo (2026-11-02)
-- Edit > Filing rules (also on the Automate ribbon): the rules that recognise document types are now edited in a
-  window instead of config.json. A rule can look at the sender ("comes from Mediacom"), phrases that must all occur,
-  phrases that must not occur, the file name, and the usual "any of" keywords. It proposes a folder (which may use
-  tokens, e.g. Bills\{org}\{year}, created when missing), a name pattern and tags.
-- **Test** runs one rule over the current folder or the whole desktop and lists what it would do (document, would
-  become, tags, why) without changing anything. **Queue for review** puts those proposals in the review list.
-- Review window: proposals show their tags; Accept applies name, folder and tags; **Undo last** (also Edit > Undo
-  last filing, Ctrl+Shift+Z) puts every document of the last accepted batch back under its old folder and name and
-  removes the tags the rule added. Undone proposals are not offered again.
-- The Smart Assistant uses the same rules: folder tokens are filled in, nested folders are created, and the rule's
-  tags are offered.
-- Indexed text keeps its line breaks from now on, so letterhead senders are also found when a document is read back
-  from the index (rule tests, assistant); documents indexed earlier gain this when they are read again.
-- Automatic filing stays off: rules only ever make proposals.
+## 0.6.5 - Duplicate finder (2026-11-02)
+- Edit > Find duplicates (also Automate > Clean up): scans the open folder (and subfolders) or the whole desktop for
+  documents that are one document twice. Three signals: identical files (same bytes; the hash is computed only for
+  files of equal size), the same text (the same paper scanned twice: the indexed text overlaps 80% or more, OCR slips
+  allowed), and first pages that look alike for documents without readable text. Online-only OneDrive files are not
+  downloaded for this.
+- Each pair shows the older and the newer copy with size and date, and why they match. **Compare side by side** opens
+  both in the viewer's compare pane; **Delete newer** / **Delete older** move one copy to the Recycle Bin after a
+  question; **Keep both** marks the pair as not a duplicate and hides it for good; **Delete all newer identical
+  copies** clears byte-identical duplicates in one go (after listing them). Nothing is deleted by itself.
+- Fingerprints are kept in the index per file version, so the second scan of a big desktop is quick.
