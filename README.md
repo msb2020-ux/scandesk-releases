@@ -2,7 +2,7 @@
 
 ScanDesk Desktop replaces PaperPort in a small medical office: scan, print-to-ScanDesk, file, find, clean up, annotate and send documents. Everything stays on your PC; nothing is uploaded. Source code is private; this page holds the installers.
 
-**Current version: 0.7.1** (released 2026-11-02)
+**Current version: 0.7.2** (released 2026-11-02)
 
 ## Install (Windows 10/11, 64-bit)
 
@@ -16,10 +16,9 @@ Help > Copy logs for support writes the logs (file names and actions only, never
 
 ## Release notes
 
-## 0.7.1 - Options window on small screens (2026-11-02)
-- Fixed: on a laptop screen (or a large display scale) the Options window grew taller than the screen, its OK and
-  Cancel buttons sat below the taskbar, and because the window is modal nothing else could be clicked; the only way out
-  was to force-close ScanDesk. The settings now scroll inside the window, OK and Cancel stay visible, and every ScanDesk
-  window is kept inside the screen from now on. Esc has always closed a dialog and Enter has always been OK; both still work.
-- Fixed: the two "Put printed documents ..." choices in Options did not switch each other off, so the choice could not
-  be changed back and forth.
+## 0.7.2 - Dragging a document to a folder (2026-11-02)
+- Fixed: with free placement (new in 0.6.7) dragging a document out of the desktop onto a folder in the tree failed with
+  "Something went wrong: Value cannot be null (Parameter 'source')" and the document stayed where it was. Dragging to a
+  folder, to the Send To bar, to Explorer or into an email works again.
+- A document that was moved or deleted while its thumbnail was being made, a password-protected or damaged PDF, or a
+  damaged image no longer writes an error line to the log (the card shows it instead).
