@@ -2,7 +2,7 @@
 
 ScanDesk Desktop replaces PaperPort in a small medical office: scan, print-to-ScanDesk, file, find, clean up, annotate and send documents. Everything stays on your PC; nothing is uploaded. Source code is private; this page holds the installers.
 
-**Current version: 0.6.3** (released 2026-11-02)
+**Current version: 0.6.4** (released 2026-11-02)
 
 ## Install (Windows 10/11, 64-bit)
 
@@ -16,14 +16,18 @@ Help > Copy logs for support writes the logs (file names and actions only, never
 
 ## Release notes
 
-## 0.6.3 - Previews for Office, CSV and other files (2026-11-02)
-- Word, Excel, PowerPoint, CSV, text and every other file kind now show a picture on the desktop: the same thumbnail
-  Explorer shows (a picture of the first page when the file's program provides one, for example Word and Excel when
-  Office is installed), otherwise the program's icon on a card. Thumbnail sizes, the details view and the Smart
-  Assistant preview use it too. Double-click still opens the file in its own program.
-- The text of .docx, .xlsx and .pptx files is read for search and smart naming (no Office needed). Older binary
-  .doc/.xls/.ppt files show their icon and open in their program but are not searched.
-- Send To > Text file / Word works for Office files as well.
-- Support switch: the environment variable SCANDESK_SOFTWARE_RENDER=1 makes ScanDesk draw its windows without the
-  graphics card, for a PC whose display driver leaves WPF windows blank (seen on the dev PC on 2026-11-02; any WPF
-  program was affected until the driver was restarted).
+## 0.6.4 - Filing rules with preview and undo (2026-11-02)
+- Edit > Filing rules (also on the Automate ribbon): the rules that recognise document types are now edited in a
+  window instead of config.json. A rule can look at the sender ("comes from Mediacom"), phrases that must all occur,
+  phrases that must not occur, the file name, and the usual "any of" keywords. It proposes a folder (which may use
+  tokens, e.g. Bills\{org}\{year}, created when missing), a name pattern and tags.
+- **Test** runs one rule over the current folder or the whole desktop and lists what it would do (document, would
+  become, tags, why) without changing anything. **Queue for review** puts those proposals in the review list.
+- Review window: proposals show their tags; Accept applies name, folder and tags; **Undo last** (also Edit > Undo
+  last filing, Ctrl+Shift+Z) puts every document of the last accepted batch back under its old folder and name and
+  removes the tags the rule added. Undone proposals are not offered again.
+- The Smart Assistant uses the same rules: folder tokens are filled in, nested folders are created, and the rule's
+  tags are offered.
+- Indexed text keeps its line breaks from now on, so letterhead senders are also found when a document is read back
+  from the index (rule tests, assistant); documents indexed earlier gain this when they are read again.
+- Automatic filing stays off: rules only ever make proposals.
