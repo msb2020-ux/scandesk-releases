@@ -2,7 +2,7 @@
 
 ScanDesk Desktop replaces PaperPort in a small medical office: scan, print-to-ScanDesk, file, find, clean up, annotate and send documents. Everything stays on your PC; nothing is uploaded. Source code is private; this page holds the installers.
 
-**Current version: 0.7.0** (released 2026-11-02)
+**Current version: 0.7.1** (released 2026-11-02)
 
 ## Install (Windows 10/11, 64-bit)
 
@@ -16,13 +16,10 @@ Help > Copy logs for support writes the logs (file names and actions only, never
 
 ## Release notes
 
-## 0.7.0 - Ask in plain words (2026-11-02)
-- Natural-language search. In the Find group choose **Ask in plain words** and describe the document: "the eye clinic
-  lease from two years ago", "what do I owe the cable company", "patient sent for cataract assessment". ScanDesk
-  compares the meaning of your words with the meaning of every document's text, not just the words themselves, and
-  lists the best matches first with how well each matches. Time hints in the question ("two years ago", "March 2025",
-  "last year") narrow the dates.
-- The meaning index is built in the background by a small language model that ships with ScanDesk
-  (all-MiniLM-L6-v2, 23 MB) and runs on this PC; nothing leaves the computer. The status bar shows "Meaning index: n of
-  m" until every document that has text is covered; questions work from the first minute on what is covered so far.
-- File > Options > "Natural-language search" turns the index off (quiet mode turns it off too).
+## 0.7.1 - Options window on small screens (2026-11-02)
+- Fixed: on a laptop screen (or a large display scale) the Options window grew taller than the screen, its OK and
+  Cancel buttons sat below the taskbar, and because the window is modal nothing else could be clicked; the only way out
+  was to force-close ScanDesk. The settings now scroll inside the window, OK and Cancel stay visible, and every ScanDesk
+  window is kept inside the screen from now on. Esc has always closed a dialog and Enter has always been OK; both still work.
+- Fixed: the two "Put printed documents ..." choices in Options did not switch each other off, so the choice could not
+  be changed back and forth.
