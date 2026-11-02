@@ -2,7 +2,7 @@
 
 ScanDesk Desktop replaces PaperPort in a small medical office: scan, print-to-ScanDesk, file, find, clean up, annotate and send documents. Everything stays on your PC; nothing is uploaded. Source code is private; this page holds the installers.
 
-**Current version: 0.6.5** (released 2026-11-02)
+**Current version: 0.6.6** (released 2026-11-02)
 
 ## Install (Windows 10/11, 64-bit)
 
@@ -16,14 +16,18 @@ Help > Copy logs for support writes the logs (file names and actions only, never
 
 ## Release notes
 
-## 0.6.5 - Duplicate finder (2026-11-02)
-- Edit > Find duplicates (also Automate > Clean up): scans the open folder (and subfolders) or the whole desktop for
-  documents that are one document twice. Three signals: identical files (same bytes; the hash is computed only for
-  files of equal size), the same text (the same paper scanned twice: the indexed text overlaps 80% or more, OCR slips
-  allowed), and first pages that look alike for documents without readable text. Online-only OneDrive files are not
-  downloaded for this.
-- Each pair shows the older and the newer copy with size and date, and why they match. **Compare side by side** opens
-  both in the viewer's compare pane; **Delete newer** / **Delete older** move one copy to the Recycle Bin after a
-  question; **Keep both** marks the pair as not a duplicate and hides it for good; **Delete all newer identical
-  copies** clears byte-identical duplicates in one go (after listing them). Nothing is deleted by itself.
-- Fingerprints are kept in the index per file version, so the second scan of a big desktop is quick.
+## 0.6.6 - Beta feedback: arrival order, quiet mode, a selection error (2026-11-02)
+- The desktop now keeps documents in the order they arrived, oldest first, so a new scan lands at the end as in
+  PaperPort. Existing installs that still had the alphabetical default are switched once; Arrange items > by Name
+  brings the alphabet back. With Auto Arrange off, a document without a saved place is put after the last one, never
+  into a gap you left on purpose.
+- File > Options > **Quiet mode**: one tick leaves your scans alone: no background reading (OCR), no suggested names, no
+  Smart Assistant pane. Scan, look, rename by hand; search then finds names only. Untick to turn everything back on.
+- Fixed: clicking a document could show "Something went wrong: An item with the same key has already been added"
+  after the folder listing had been rebuilt (seen on the OFC laptop). The selection is now dropped and restored around
+  a rebuild, and a stale selection entry is recovered quietly instead of shown as an error.
+- Old PaperPort .max files (the format from before PaperPort switched to PDF) are counted when a folder is added
+  (Folder Manager, PaperPort import) and on request (File > Find old PaperPort .max files). ScanDesk cannot read
+  them; the message explains how to convert them without loss in PaperPort itself (select, Save As, PDF image).
+- The welcome tip now says how to rename (click the name of a selected document, or F2), how to arrange and group
+  documents, and where quiet mode is.
