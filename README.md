@@ -2,7 +2,7 @@
 
 ScanDesk Desktop replaces PaperPort in a small medical office: scan, print-to-ScanDesk, file, find, clean up, annotate and send documents. Everything stays on your PC; nothing is uploaded. Source code is private; this page holds the installers.
 
-**Current version: 0.6.2** (released 2026-11-02)
+**Current version: 0.6.3** (released 2026-11-02)
 
 ## Install (Windows 10/11, 64-bit)
 
@@ -16,7 +16,14 @@ Help > Copy logs for support writes the logs (file names and actions only, never
 
 ## Release notes
 
-## 0.6.2 - Linked folders show their real location (2026-11-02)
-- The status bar showed a linked folder as if it lived under the ScanDesk desktop folder on C:. It now shows where
-  the documents really are (for example D:\OneDrive\Personal Vault\...). Nothing had been moved; only the text was wrong.
-- The second pane (split desktop) can be opened on a folder inside a linked folder's real location.
+## 0.6.3 - Previews for Office, CSV and other files (2026-11-02)
+- Word, Excel, PowerPoint, CSV, text and every other file kind now show a picture on the desktop: the same thumbnail
+  Explorer shows (a picture of the first page when the file's program provides one, for example Word and Excel when
+  Office is installed), otherwise the program's icon on a card. Thumbnail sizes, the details view and the Smart
+  Assistant preview use it too. Double-click still opens the file in its own program.
+- The text of .docx, .xlsx and .pptx files is read for search and smart naming (no Office needed). Older binary
+  .doc/.xls/.ppt files show their icon and open in their program but are not searched.
+- Send To > Text file / Word works for Office files as well.
+- Support switch: the environment variable SCANDESK_SOFTWARE_RENDER=1 makes ScanDesk draw its windows without the
+  graphics card, for a PC whose display driver leaves WPF windows blank (seen on the dev PC on 2026-11-02; any WPF
+  program was affected until the driver was restarted).
