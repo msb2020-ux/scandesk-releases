@@ -2,7 +2,7 @@
 
 ScanDesk Desktop replaces PaperPort in a small medical office: scan, print-to-ScanDesk, file, find, clean up, annotate and send documents. Everything stays on your PC; nothing is uploaded. Source code is private; this page holds the installers.
 
-**Current version: 0.8.3** (released 2026-11-03)
+**Current version: 0.9.0** (released 2026-11-03)
 
 ## Install (Windows 10/11, 64-bit)
 
@@ -16,15 +16,26 @@ Help > Copy logs for support writes the logs (file names and actions only, never
 
 ## Release notes
 
-## 0.8.3 - Stray copies in linked folders (2026-11-03) - please update
-- Fixed a bug that made copies of documents. In a linked folder on another drive (Personal Vault, Home, the office
-  folders on D: with the desktop on C:), every time ScanDesk kept a previous version of a file (after OCR wrote the
-  text layer, after a rotate or clean-up) the backup was written next to the original instead of into the hidden
-  .Versions store, named "name.20261103-061844-789.pdf". The background reader then treated that copy as a new
-  document, gave it a text layer, backed it up again, and a folder could fill with copies. Versions 0.6.1 to 0.8.2 did
-  this. Backups now always go into the store ("_linked\<drive>\..." for linked folders), and a stamped copy is never
-  rewritten even if one slips through.
-- Help > **Clean up stray version copies** finds those copies (only where the original is still beside them) and
-  moves them into the store, where they stay listed under Previous versions. Nothing is deleted. At the first start
-  after the update ScanDesk looks for them once and offers the same.
-- Until you update: File > Options > Quiet mode stops the background reader and with it the copying.
+## 0.9.0 - The desktop as you asked (2026-11-03)
+- Documents start in the upper-left corner. With free placement the icons sat on a sheet that floated to the middle of
+  the view when the folder had few documents, and nothing could be dragged above its edge; the sheet now starts at the
+  top-left and is at least as tall as the view. When the window gets narrower, icons left beyond the right edge are
+  pulled back into view (the next free cell, row by row); icons that are still visible stay where you put them.
+- PaperPort's own files are hidden: .ppinfocache, *.ptn, maxdesk.ini, maxdesk.ini2 (and Windows' desktop.ini and
+  thumbs.db). They stay on disk, so PaperPort still works on the same folders.
+- Two monitors: the window's place is now kept in screen pixels with the monitor's name and set before the window
+  shows, so a portrait second monitor and mixed scaling work; the log says what was saved and what was done.
+- The desktop's right-click menu follows PaperPort's order: Views, Arrange items, Line up items, Refresh; Paste,
+  Select all, New; then Smart naming and Open in Explorer.
+- The Send To bar shows each target's own icon: the program's icon for program targets, your mail program for Email,
+  the printer, Word, Notepad and Explorer for the built-ins, the folder icon for folder targets (the glyph stays when
+  no icon can be read).
+- A locked OneDrive Personal Vault: double-click its folder to re-check it. Unlocked, its contents show at once; still
+  locked, ScanDesk offers to open it in Explorer (OneDrive's unlock prompt) and keeps checking for a minute.
+- Taskbar: the installer's shortcuts take their icon from ScanDesk.exe itself instead of a separate file that every
+  upgrade deleted (the blank pinned button), and the pinned button and the running window now share one identity.
+  Re-pin ScanDesk once after this update; from then on the icon stays.
+- Modern look, second pass: folder tree with chevrons and rounded hover and selection, a pill-shaped search box, thin
+  rounded scroll bars, rounded drop-down lists, and a soft shadow when the mouse is over a document card.
+- Updates: a release on GitHub stays hidden until its installer is fully uploaded, and the dialog explains itself
+  when it finds a version whose installer is not there yet.
