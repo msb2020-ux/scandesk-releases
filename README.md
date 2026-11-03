@@ -2,7 +2,7 @@
 
 ScanDesk Desktop replaces PaperPort in a small medical office: scan, print-to-ScanDesk, file, find, clean up, annotate and send documents. Everything stays on your PC; nothing is uploaded. Source code is private; this page holds the installers.
 
-**Current version: 0.8.2** (released 2026-11-02)
+**Current version: 0.8.3** (released 2026-11-03)
 
 ## Install (Windows 10/11, 64-bit)
 
@@ -16,22 +16,15 @@ Help > Copy logs for support writes the logs (file names and actions only, never
 
 ## Release notes
 
-## 0.8.2 - Two monitors, the scan window, and a smarter assistant (2026-11-02)
-- ScanDesk reopens on the monitor it was closed on, at the same spot (maximized windows too). Windows that were being
-  pushed onto the main monitor at start (a side effect of the 0.7.1 fit-to-screen guard) now stay on the monitor they
-  are on, and every dialog, the Scan window included, opens centered on ScanDesk's own window.
-- The Scan window opens with the settings of your last scan: profile, color or gray, dpi, feeder, duplex, paper size,
-  clean-up ticks. Saved profiles are untouched; this is just "the way you scanned last time".
-- Smart naming reads the first page first: the suggested name is queued as soon as page 1 is read, not after the whole
-  document, and **Read now** in the Smart Assistant shows the first page's result at once while the rest is read in
-  the background.
-- The Smart Assistant learns from you: change **Type** (or the sender) before pressing Rename and the next document
-  from that sender gets the same type, rule or no rule. The status bar confirms what was remembered; set the type back
-  once to forget it. Learned types live in config.json (TypeBySender).
-- Credit-card statements: a new **Credit card** starter rule (minimum payment due, new balance, payment due date,
-  account ending, closing date, late payment warning, interest charged, ...) and a table of well-known senders
-  (KnownSenders in config.json: American Express, Chase, Capital One, Discover, Citi, Bank of America, Wells Fargo,
-  Regions, U.S. Bank, Mediacom, Alabama Power, AT&T, Verizon, the IRS, Medicare, the big health insurers, ...) that
-  are recognised from a web address or a name anywhere on the page. Mark's American Express bill, whose top line is
-  the card's product name, now comes out as "American Express Credit card 2026 October" instead of "Delta SkyMiles
-  Platinum Document".
+## 0.8.3 - Stray copies in linked folders (2026-11-03) - please update
+- Fixed a bug that made copies of documents. In a linked folder on another drive (Personal Vault, Home, the office
+  folders on D: with the desktop on C:), every time ScanDesk kept a previous version of a file (after OCR wrote the
+  text layer, after a rotate or clean-up) the backup was written next to the original instead of into the hidden
+  .Versions store, named "name.20261103-061844-789.pdf". The background reader then treated that copy as a new
+  document, gave it a text layer, backed it up again, and a folder could fill with copies. Versions 0.6.1 to 0.8.2 did
+  this. Backups now always go into the store ("_linked\<drive>\..." for linked folders), and a stamped copy is never
+  rewritten even if one slips through.
+- Help > **Clean up stray version copies** finds those copies (only where the original is still beside them) and
+  moves them into the store, where they stay listed under Previous versions. Nothing is deleted. At the first start
+  after the update ScanDesk looks for them once and offers the same.
+- Until you update: File > Options > Quiet mode stops the background reader and with it the copying.
