@@ -2,7 +2,7 @@
 
 ScanDesk Desktop replaces PaperPort in a small medical office: scan, print-to-ScanDesk, file, find, clean up, annotate and send documents. Everything stays on your PC; nothing is uploaded. Source code is private; this page holds the installers.
 
-**Current version: 0.8.1** (released 2026-11-02)
+**Current version: 0.8.2** (released 2026-11-02)
 
 ## Install (Windows 10/11, 64-bit)
 
@@ -16,13 +16,22 @@ Help > Copy logs for support writes the logs (file names and actions only, never
 
 ## Release notes
 
-## 0.8.1 - A mortgage bill is not an insurance document (2026-11-02)
-- Fixed: a mortgage statement (heading "HOME LOAN ACCOUNT", escrow lines that mention insurance) was named and filed as
-  Insurance. Three starter rules are new: **Mortgage** (mortgage, home loan, loan account, escrow, principal and
-  interest, loan number, servicer), **Bank statement** and **Tax**; existing installs get them in front of the Insurance
-  rule, and rules you edited or deleted are left alone.
-- Smart naming now pays attention to the top of the page: a type word that appears in the heading (the first lines,
-  where the title and the account line are) counts extra, so "HOME LOAN ACCOUNT" at the top outweighs an "insurance"
-  line in the details. The evidence shows which hits came from the heading.
-- If a document still gets the wrong type, change **Type** in the Smart Assistant before pressing Rename, or add a
-  rule with the sender's name under Edit > Filing rules so the next one from them is right from the start.
+## 0.8.2 - Two monitors, the scan window, and a smarter assistant (2026-11-02)
+- ScanDesk reopens on the monitor it was closed on, at the same spot (maximized windows too). Windows that were being
+  pushed onto the main monitor at start (a side effect of the 0.7.1 fit-to-screen guard) now stay on the monitor they
+  are on, and every dialog, the Scan window included, opens centered on ScanDesk's own window.
+- The Scan window opens with the settings of your last scan: profile, color or gray, dpi, feeder, duplex, paper size,
+  clean-up ticks. Saved profiles are untouched; this is just "the way you scanned last time".
+- Smart naming reads the first page first: the suggested name is queued as soon as page 1 is read, not after the whole
+  document, and **Read now** in the Smart Assistant shows the first page's result at once while the rest is read in
+  the background.
+- The Smart Assistant learns from you: change **Type** (or the sender) before pressing Rename and the next document
+  from that sender gets the same type, rule or no rule. The status bar confirms what was remembered; set the type back
+  once to forget it. Learned types live in config.json (TypeBySender).
+- Credit-card statements: a new **Credit card** starter rule (minimum payment due, new balance, payment due date,
+  account ending, closing date, late payment warning, interest charged, ...) and a table of well-known senders
+  (KnownSenders in config.json: American Express, Chase, Capital One, Discover, Citi, Bank of America, Wells Fargo,
+  Regions, U.S. Bank, Mediacom, Alabama Power, AT&T, Verizon, the IRS, Medicare, the big health insurers, ...) that
+  are recognised from a web address or a name anywhere on the page. Mark's American Express bill, whose top line is
+  the card's product name, now comes out as "American Express Credit card 2026 October" instead of "Delta SkyMiles
+  Platinum Document".
