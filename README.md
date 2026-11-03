@@ -2,7 +2,7 @@
 
 ScanDesk Desktop replaces PaperPort in a small medical office: scan, print-to-ScanDesk, file, find, clean up, annotate and send documents. Everything stays on your PC; nothing is uploaded. Source code is private; this page holds the installers.
 
-**Current version: 0.10.2** (released 2026-11-03)
+**Current version: 0.11.0** (released 2026-11-03)
 
 ## Install (Windows 10/11, 64-bit)
 
@@ -16,10 +16,14 @@ Help > Copy logs for support writes the logs (file names and actions only, never
 
 ## Release notes
 
-## 0.10.2 - Invitations open in your mail program (2026-11-03)
-- Help > Invite a tester by email and Help > Send feedback now open the new message in the mail program you work in
-  (classic Outlook, Thunderbird, eM Client: whatever answers Simple MAPI, the same door the Send To > Email button
-  uses). Before, they used a mailto: link, which Windows hands to the Store "Outlook (new)" web view or to a browser
-  on many PCs, so the message appeared in a browser window. The link stays as the fallback; when even that is a
-  browser, ScanDesk says so and puts the text on the clipboard.
-- Send feedback fills in the recipient through the same door.
+## 0.11.0 - Marks you can move, change and remove, before and after the save (2026-11-03)
+- Highlights, text, notes, boxes, arrows, stamps and image stamps on PDF pages are now real PDF annotations from the
+  moment you place them, the way PaperPort keeps them. Click a mark to select it, drag it to move, pull a corner to
+  resize, double-click (or Edit text) to change the words, press Delete to remove it. All of this still works after the
+  save, in ScanDesk and in other PDF readers; every step is undoable with Ctrl+Z.
+- Marks made by other programs (Acrobat comments, ink scribbles, PaperPort notes) are listed too: ScanDesk moves and
+  removes them whole and leaves their look alone. Form fields and links are never touched.
+- Every mark carries its own appearance, drawn upright for the page's rotation, so Acrobat, Edge, PaperPort and the
+  Smart Assistant's thumbnails all show it the same way. Notes get a yellow note icon everywhere.
+- The annotation bar has a Select tool and Edit text / Delete buttons. "Apply marks" is only shown when something must
+  be burned in: a redaction (which really removes what is underneath) or a mark on an image page (no annotation layer).
