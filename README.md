@@ -2,7 +2,7 @@
 
 ScanDesk Desktop replaces PaperPort in a small medical office: scan, print-to-ScanDesk, file, find, clean up, annotate and send documents. Everything stays on your PC; nothing is uploaded. Source code is private; this page holds the installers.
 
-**Current version: 0.11.3** (released 2026-11-03)
+**Current version: 0.12.0** (released 2026-11-03)
 
 ## Install (Windows 10/11, 64-bit)
 
@@ -16,9 +16,12 @@ Help > Copy logs for support writes the logs (file names and actions only, never
 
 ## Release notes
 
-## 0.11.3 - The padlock follows the vault by itself (2026-11-03)
-- Linked folders are re-checked every five seconds and on F5. Unlock the Personal Vault in OneDrive and ScanDesk drops
-  the padlock, lists the vault and watches it within moments; when the vault locks again the padlock is back. Before,
-  the padlock changed only on a double-click of the folder.
-- Previous versions that waited locally while the vault was locked move into the vault's own hidden store as soon as
-  it opens.
+## 0.12.0 - Private folders: nothing of a vault leaves the vault (2026-11-03)
+- File > Folder Manager has a **Private** column for linked folders. A private folder is read and edited in place and
+  ScanDesk keeps nothing of its documents anywhere else: no previous versions, no thumbnails, no text in the search
+  index, no naming suggestions, no text layer written by the reader, no hidden store inside the folder. The audit
+  names only the folder. Search still finds these documents by name; nothing else is recorded about them.
+- A OneDrive Personal Vault link is private from the first start of this version. Untick it in the Folder Manager
+  if you want the vault indexed like any other folder. Turning Private on drops what the index already held of that
+  folder.
+- Reading a document's version list no longer creates the hidden store in a folder; only keeping a version does.
