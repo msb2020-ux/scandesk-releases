@@ -2,7 +2,7 @@
 
 ScanDesk Desktop replaces PaperPort in a small medical office: scan, print-to-ScanDesk, file, find, clean up, annotate and send documents. Everything stays on your PC; nothing is uploaded. Source code is private; this page holds the installers.
 
-**Current version: 0.11.2** (released 2026-11-03)
+**Current version: 0.11.3** (released 2026-11-03)
 
 ## Install (Windows 10/11, 64-bit)
 
@@ -16,12 +16,9 @@ Help > Copy logs for support writes the logs (file names and actions only, never
 
 ## Release notes
 
-## 0.11.2 - The locked Personal Vault shows its padlock again (2026-11-03)
-- A locked OneDrive Personal Vault has no folder on disk, only its shortcut; that absence is how ScanDesk knows to show
-  the padlock. Since 0.10.0 the library store created a plain folder of the vault's name to put its hidden store in,
-  so the padlock vanished and the vault looked empty, and the 0.11.1 start moved the vault documents' previous versions
-  into that folder, where OneDrive could have synced them outside the vault. ScanDesk never creates a library's root
-  folder now; a folder that holds nothing but ScanDesk's store next to the vault's shortcut counts as locked.
-- Previous versions of documents in a library that is not reachable (locked vault, unplugged drive) wait in a local
-  folder that OneDrive never sees and move into the library's own hidden store the next time it is open in ScanDesk.
-  Versions kept by older releases under the desktop stay put until their library is reachable.
+## 0.11.3 - The padlock follows the vault by itself (2026-11-03)
+- Linked folders are re-checked every five seconds and on F5. Unlock the Personal Vault in OneDrive and ScanDesk drops
+  the padlock, lists the vault and watches it within moments; when the vault locks again the padlock is back. Before,
+  the padlock changed only on a double-click of the folder.
+- Previous versions that waited locally while the vault was locked move into the vault's own hidden store as soon as
+  it opens.
