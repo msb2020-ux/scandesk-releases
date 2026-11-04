@@ -2,7 +2,7 @@
 
 ScanDesk Desktop replaces PaperPort in a small medical office: scan, print-to-ScanDesk, file, find, clean up, annotate and send documents. Everything stays on your PC; nothing is uploaded. Source code is private; this page holds the installers.
 
-**Current version: 0.11.1** (released 2026-11-03)
+**Current version: 0.11.2** (released 2026-11-03)
 
 ## Install (Windows 10/11, 64-bit)
 
@@ -16,8 +16,12 @@ Help > Copy logs for support writes the logs (file names and actions only, never
 
 ## Release notes
 
-## 0.11.1 - Modern appearance loads again (2026-11-03)
-- Starting with the Modern appearance (or switching to it) showed "Something went wrong: Set property
-  ResourceDictionary.DeferrableContent threw an exception" since 0.10.0: the Modern style sheet listed the check box,
-  radio button, expander and group box styles twice. The older duplicates are gone and a test now refuses a style
-  sheet that defines a control's style twice.
+## 0.11.2 - The locked Personal Vault shows its padlock again (2026-11-03)
+- A locked OneDrive Personal Vault has no folder on disk, only its shortcut; that absence is how ScanDesk knows to show
+  the padlock. Since 0.10.0 the library store created a plain folder of the vault's name to put its hidden store in,
+  so the padlock vanished and the vault looked empty, and the 0.11.1 start moved the vault documents' previous versions
+  into that folder, where OneDrive could have synced them outside the vault. ScanDesk never creates a library's root
+  folder now; a folder that holds nothing but ScanDesk's store next to the vault's shortcut counts as locked.
+- Previous versions of documents in a library that is not reachable (locked vault, unplugged drive) wait in a local
+  folder that OneDrive never sees and move into the library's own hidden store the next time it is open in ScanDesk.
+  Versions kept by older releases under the desktop stay put until their library is reachable.
