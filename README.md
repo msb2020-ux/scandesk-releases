@@ -2,7 +2,7 @@
 
 ScanDesk Desktop replaces PaperPort in a small medical office: scan, print-to-ScanDesk, file, find, clean up, annotate and send documents. Everything stays on your PC; nothing is uploaded. Source code is private; this page holds the installers.
 
-**Current version: 0.11.0** (released 2026-11-03)
+**Current version: 0.11.1** (released 2026-11-03)
 
 ## Install (Windows 10/11, 64-bit)
 
@@ -16,14 +16,8 @@ Help > Copy logs for support writes the logs (file names and actions only, never
 
 ## Release notes
 
-## 0.11.0 - Marks you can move, change and remove, before and after the save (2026-11-03)
-- Highlights, text, notes, boxes, arrows, stamps and image stamps on PDF pages are now real PDF annotations from the
-  moment you place them, the way PaperPort keeps them. Click a mark to select it, drag it to move, pull a corner to
-  resize, double-click (or Edit text) to change the words, press Delete to remove it. All of this still works after the
-  save, in ScanDesk and in other PDF readers; every step is undoable with Ctrl+Z.
-- Marks made by other programs (Acrobat comments, ink scribbles, PaperPort notes) are listed too: ScanDesk moves and
-  removes them whole and leaves their look alone. Form fields and links are never touched.
-- Every mark carries its own appearance, drawn upright for the page's rotation, so Acrobat, Edge, PaperPort and the
-  Smart Assistant's thumbnails all show it the same way. Notes get a yellow note icon everywhere.
-- The annotation bar has a Select tool and Edit text / Delete buttons. "Apply marks" is only shown when something must
-  be burned in: a redaction (which really removes what is underneath) or a mark on an image page (no annotation layer).
+## 0.11.1 - Modern appearance loads again (2026-11-03)
+- Starting with the Modern appearance (or switching to it) showed "Something went wrong: Set property
+  ResourceDictionary.DeferrableContent threw an exception" since 0.10.0: the Modern style sheet listed the check box,
+  radio button, expander and group box styles twice. The older duplicates are gone and a test now refuses a style
+  sheet that defines a control's style twice.
