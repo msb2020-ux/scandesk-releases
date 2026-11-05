@@ -2,7 +2,7 @@
 
 ScanDesk Desktop replaces PaperPort in a small medical office: scan, print-to-ScanDesk, file, find, clean up, annotate and send documents. Everything stays on your PC; nothing is uploaded. Source code is private; this page holds the installers.
 
-**Current version: 0.12.4** (released 2026-11-05)
+**Current version: 0.12.5** (released 2026-11-05)
 
 ## Install (Windows 10/11, 64-bit)
 
@@ -16,14 +16,15 @@ Help > Copy logs for support writes the logs (file names and actions only, never
 
 ## Release notes
 
-## 0.12.4 - A damaged installation offers to repair itself (2026-11-05)
-- On a new PC Windows reported "ScanDesk.exe - Bad Image: x64\leptonica-1.85.0.dll is either not designed to run on
-  Windows or it contains an error": that program file was no longer a program file (antivirus quarantine or an
-  interrupted update), so text recognition failed and with it the ScanDesk printer, which needs the running program to
-  pick up the print. ScanDesk now checks its program files at every start and, when one is damaged, names it and offers
-  Repair: Windows reinstalls the same version from the copy it keeps, without a download.
-- Downloaded installers that are no longer needed are removed from the local updates folder (the newest is kept for a
-  repair); one PC held nine of them, 1.6 GB.
-- .max files that were already converted are no longer counted, offered or listed on another PC. The originals sit in a
-  hidden "_MAX originals (converted)" folder, but OneDrive does not carry the hidden mark to other PCs, so a new PC
-  counted them again (49 in Oculo-Facial Consultants that the laptop had converted) and showed the folder in the tree.
+## 0.12.5 - Windows' Controlled folder access no longer blocks ScanDesk (2026-11-05)
+- On the office PCs Windows Security's "Controlled folder access" (ransomware protection) was blocking ScanDesk.exe
+  from writing into Documents and OneDrive: "Print capture failed: Access to the path is denied", icon arrangements
+  that could not be saved, "Unauthorized changes blocked" notifications. The installer now registers ScanDesk's
+  programs as allowed (with its administrator rights, on every install and update); the uninstall removes them again.
+- ScanDesk also checks at start whether it is blocked and offers to allow itself (one administrator prompt), once per
+  version; Help > Allow ScanDesk through Windows Security does it on demand. The print-capture message says when this
+  is the cause.
+- The publisher-trust package: the script now checks that it was extracted from the zip (Windows extracts only the
+  one file when it is run from inside the zip), and it also unblocks ScanDesk installers in Downloads, which is what
+  SmartScreen reacts to. The instructions say plainly that a self-signed certificate cannot satisfy SmartScreen's
+  reputation check, so "More info > Run anyway" may still be needed once.
