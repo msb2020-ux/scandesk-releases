@@ -2,7 +2,7 @@
 
 ScanDesk Desktop replaces PaperPort in a small medical office: scan, print-to-ScanDesk, file, find, clean up, annotate and send documents. Everything stays on your PC; nothing is uploaded. Source code is private; this page holds the installers.
 
-**Current version: 0.12.5** (released 2026-11-05)
+**Current version: 0.12.6** (released 2026-11-05)
 
 ## Install (Windows 10/11, 64-bit)
 
@@ -16,15 +16,10 @@ Help > Copy logs for support writes the logs (file names and actions only, never
 
 ## Release notes
 
-## 0.12.5 - Windows' Controlled folder access no longer blocks ScanDesk (2026-11-05)
-- On the office PCs Windows Security's "Controlled folder access" (ransomware protection) was blocking ScanDesk.exe
-  from writing into Documents and OneDrive: "Print capture failed: Access to the path is denied", icon arrangements
-  that could not be saved, "Unauthorized changes blocked" notifications. The installer now registers ScanDesk's
-  programs as allowed (with its administrator rights, on every install and update); the uninstall removes them again.
-- ScanDesk also checks at start whether it is blocked and offers to allow itself (one administrator prompt), once per
-  version; Help > Allow ScanDesk through Windows Security does it on demand. The print-capture message says when this
-  is the cause.
-- The publisher-trust package: the script now checks that it was extracted from the zip (Windows extracts only the
-  one file when it is run from inside the zip), and it also unblocks ScanDesk installers in Downloads, which is what
-  SmartScreen reacts to. The instructions say plainly that a self-signed certificate cannot satisfy SmartScreen's
-  reputation check, so "More info > Run anyway" may still be needed once.
+## 0.12.6 - The installer trusts the publisher certificate itself (2026-11-05)
+- Every install and update now checks whether the office signing certificate is in the PC's Trusted Root and Trusted
+  Publishers stores and adds it when it is missing, with the installer's own administrator rights. The separate
+  trust zip is no longer needed: the very first install on a new PC is the only time Windows says "Unknown
+  publisher"; from then on installers and updates name the publisher. A full uninstall removes the certificate again.
+- ScanDesk also checks this at start and, when the certificate is not trusted (for example after someone removed it),
+  offers to add it with one administrator prompt, once per version.
