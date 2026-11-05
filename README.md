@@ -2,7 +2,7 @@
 
 ScanDesk Desktop replaces PaperPort in a small medical office: scan, print-to-ScanDesk, file, find, clean up, annotate and send documents. Everything stays on your PC; nothing is uploaded. Source code is private; this page holds the installers.
 
-**Current version: 0.12.2** (released 2026-11-04)
+**Current version: 0.12.3** (released 2026-11-05)
 
 ## Install (Windows 10/11, 64-bit)
 
@@ -16,12 +16,6 @@ Help > Copy logs for support writes the logs (file names and actions only, never
 
 ## Release notes
 
-## 0.12.2 - Outlook drops that failed to read; a folder that refuses its store (2026-11-04)
-- On Catherine's PC, arranging icons in a linked OneDrive folder showed "Something went wrong: Could not find file
-  '...\.scandesk\layouts'": OneDrive would not let ScanDesk make the folder's hidden store. ScanDesk now keeps the icon
-  arrangement locally and the previous versions in its local pending store when a folder refuses the store, and no
-  box appears.
-- Dragging from Outlook onto the desktop could end in "Invalid FORMATETC structure" with nothing imported (the
-  laptop's log, 2026-11-03 14:49). Outlook refuses a request for several transfer mediums at once, and a dragged
-  message comes as a compound file rather than a stream. Each item is now asked for one medium at a time, and
-  messages are copied storage-to-storage into a proper .msg file.
+## 0.12.3 - All .ini2 files hidden (2026-11-05)
+- PaperPort writes .ini2 files under more names than maxdesk.ini2; every file with that extension is now hidden from
+  the desktop (it stays on disk, PaperPort keeps working).
