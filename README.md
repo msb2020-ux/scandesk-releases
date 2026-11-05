@@ -2,7 +2,7 @@
 
 ScanDesk Desktop replaces PaperPort in a small medical office: scan, print-to-ScanDesk, file, find, clean up, annotate and send documents. Everything stays on your PC; nothing is uploaded. Source code is private; this page holds the installers.
 
-**Current version: 0.12.1** (released 2026-11-03)
+**Current version: 0.12.2** (released 2026-11-04)
 
 ## Install (Windows 10/11, 64-bit)
 
@@ -16,8 +16,12 @@ Help > Copy logs for support writes the logs (file names and actions only, never
 
 ## Release notes
 
-## 0.12.1 - Lock checks written to the log (2026-11-03)
-- Every first look at a linked folder and every change of its lock state goes into the log with what ScanDesk saw
-  (folder present, its attributes, the shortcut beside it, the first entry or the error), and the padlock's tooltip
-  shows the same line. The start line says whether ScanDesk runs with administrator rights, which would hide an
-  unlocked Personal Vault from it. For the case where a vault stayed locked in ScanDesk until a restart.
+## 0.12.2 - Outlook drops that failed to read; a folder that refuses its store (2026-11-04)
+- On Catherine's PC, arranging icons in a linked OneDrive folder showed "Something went wrong: Could not find file
+  '...\.scandesk\layouts'": OneDrive would not let ScanDesk make the folder's hidden store. ScanDesk now keeps the icon
+  arrangement locally and the previous versions in its local pending store when a folder refuses the store, and no
+  box appears.
+- Dragging from Outlook onto the desktop could end in "Invalid FORMATETC structure" with nothing imported (the
+  laptop's log, 2026-11-03 14:49). Outlook refuses a request for several transfer mediums at once, and a dragged
+  message comes as a compound file rather than a stream. Each item is now asked for one medium at a time, and
+  messages are copied storage-to-storage into a proper .msg file.
