@@ -2,7 +2,7 @@
 
 ScanDesk Desktop replaces PaperPort in a small medical office: scan, print-to-ScanDesk, file, find, clean up, annotate and send documents. Everything stays on your PC; nothing is uploaded. Source code is private; this page holds the installers.
 
-**Current version: 0.12.7** (released 2026-11-08)
+**Current version: 0.12.8** (released 2026-11-09)
 
 ## Install (Windows 10/11, 64-bit)
 
@@ -16,9 +16,12 @@ Help > Copy logs for support writes the logs (file names and actions only, never
 
 ## Release notes
 
-## 0.12.7 - Nothing is created or moved through a locked vault (2026-11-08)
-- Adding a folder, importing, moving, renaming, stacking, deleting or saving inside a linked folder whose target is not
-  there (a locked OneDrive Personal Vault, an unplugged drive) now stops with a clear message and changes nothing.
-  Before, "New folder" on a locked vault created a plain folder of the vault's name with just the new path inside; the
-  tree then showed that stand-in instead of the real vault, so whole year folders looked missing, and OneDrive synced
-  the stand-in to the other PCs as "Personal Vault-DrBrown-Mobile" (it held no documents and has been removed).
+## 0.12.8 - Folder changes are spelled out and logged (2026-11-09)
+- Dragging a folder onto another folder in the tree now asks first ("Move the folder X and everything in it into Y?"),
+  as PaperPort does. A slip of the mouse could silently move a whole year of documents.
+- "Rename folder" now says which folder it renames and what it holds ("It holds 10 subfolders and 97 documents; they
+  stay inside it under the new name. To add a folder inside it instead, use New folder"). "New folder" says where the
+  new folder goes. The two buttons sit side by side on the toolbar; on 2026-11-06 a year folder was renamed to "10" by
+  someone who meant to add a subfolder 10, and the year looked lost.
+- Every folder create, rename, move, delete and import, and every move of documents, is now also written to the
+  activity log (Help > Copy logs), with the old and new paths, so what happened can be read later without the database.
