@@ -2,7 +2,7 @@
 
 ScanDesk Desktop replaces PaperPort in a small medical office: scan, print-to-ScanDesk, file, find, clean up, annotate and send documents. Everything stays on your PC; nothing is uploaded. Source code is private; this page holds the installers.
 
-**Current version: 0.12.6** (released 2026-11-05)
+**Current version: 0.12.7** (released 2026-11-08)
 
 ## Install (Windows 10/11, 64-bit)
 
@@ -16,10 +16,9 @@ Help > Copy logs for support writes the logs (file names and actions only, never
 
 ## Release notes
 
-## 0.12.6 - The installer trusts the publisher certificate itself (2026-11-05)
-- Every install and update now checks whether the office signing certificate is in the PC's Trusted Root and Trusted
-  Publishers stores and adds it when it is missing, with the installer's own administrator rights. The separate
-  trust zip is no longer needed: the very first install on a new PC is the only time Windows says "Unknown
-  publisher"; from then on installers and updates name the publisher. A full uninstall removes the certificate again.
-- ScanDesk also checks this at start and, when the certificate is not trusted (for example after someone removed it),
-  offers to add it with one administrator prompt, once per version.
+## 0.12.7 - Nothing is created or moved through a locked vault (2026-11-08)
+- Adding a folder, importing, moving, renaming, stacking, deleting or saving inside a linked folder whose target is not
+  there (a locked OneDrive Personal Vault, an unplugged drive) now stops with a clear message and changes nothing.
+  Before, "New folder" on a locked vault created a plain folder of the vault's name with just the new path inside; the
+  tree then showed that stand-in instead of the real vault, so whole year folders looked missing, and OneDrive synced
+  the stand-in to the other PCs as "Personal Vault-DrBrown-Mobile" (it held no documents and has been removed).
