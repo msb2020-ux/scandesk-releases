@@ -2,7 +2,7 @@
 
 ScanDesk Desktop replaces PaperPort in a small medical office: scan, print-to-ScanDesk, file, find, clean up, annotate and send documents. Everything stays on your PC; nothing is uploaded. Source code is private; this page holds the installers.
 
-**Current version: 0.12.10** (released 2026-11-10)
+**Current version: 0.12.11** (released 2026-11-10)
 
 ## Install (Windows 10/11, 64-bit)
 
@@ -16,12 +16,10 @@ Help > Copy logs for support writes the logs (file names and actions only, never
 
 ## Release notes
 
-## 0.12.10 - No more "Allow ScanDesk?" after every update (2026-11-10)
-- Since 0.12.5 the installer has put ScanDesk on Windows Security's Controlled folder access allowed list, but it wrote the
-  path as "C:\Program Files\ScanDesk\.\ScanDesk.exe" (a stray dot). ScanDesk looked for the path without the dot, did not
-  find itself, and asked "Allow ScanDesk now?" once after every update on PCs where ransomware protection is on. The
-  installer now writes the plain path and removes the dotted leftovers; the app finds itself and stays quiet.
-- Behind the scenes: the installer's Defender step is now covered by tests, and a release goes out through one
-  checked script with a dry run, so a slip like the stray dot is caught before anything ships.
-- The .max tools are easier to find: "Convert .max" and "Find .max" sit on the Organize ribbon next to Folder Manager,
-  and a folder's right-click menu has "Convert old PaperPort .max files here". File > Convert old PaperPort .max files stays.
+## 0.12.11 - Failed .max files in one folder (2026-11-10)
+- After a .max conversion run, a "Collect failed files" button moves the files PaperPort's converter could not read into one
+  visible folder, "PaperPort files that did not convert", at the top of the folder you converted, keeping their subfolder
+  names, with a "where these came from.txt" listing the original places. It opens in Explorer. Nothing is deleted, nothing
+  moves until you click, and the collected files are not offered again (move one back out to retry it). The run itself
+  already continued past failures; the two left in a Home folder of 6,723 were the reason for this.
+- The failure text now quotes the converter's own reason ("Failed, file could not be converted!") instead of its sign-off line.
