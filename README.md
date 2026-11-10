@@ -2,7 +2,7 @@
 
 ScanDesk Desktop replaces PaperPort in a small medical office: scan, print-to-ScanDesk, file, find, clean up, annotate and send documents. Everything stays on your PC; nothing is uploaded. Source code is private; this page holds the installers.
 
-**Current version: 0.12.8** (released 2026-11-09)
+**Current version: 0.12.9** (released 2026-11-10)
 
 ## Install (Windows 10/11, 64-bit)
 
@@ -16,12 +16,12 @@ Help > Copy logs for support writes the logs (file names and actions only, never
 
 ## Release notes
 
-## 0.12.8 - Folder changes are spelled out and logged (2026-11-09)
-- Dragging a folder onto another folder in the tree now asks first ("Move the folder X and everything in it into Y?"),
-  as PaperPort does. A slip of the mouse could silently move a whole year of documents.
-- "Rename folder" now says which folder it renames and what it holds ("It holds 10 subfolders and 97 documents; they
-  stay inside it under the new name. To add a folder inside it instead, use New folder"). "New folder" says where the
-  new folder goes. The two buttons sit side by side on the toolbar; on 2026-11-06 a year folder was renamed to "10" by
-  someone who meant to add a subfolder 10, and the year looked lost.
-- Every folder create, rename, move, delete and import, and every move of documents, is now also written to the
-  activity log (Help > Copy logs), with the old and new paths, so what happened can be read later without the database.
+## 0.12.9 - Paste a picture, zoom slider, finish screen (2026-11-09)
+- Paste a picture (Ctrl+V on the desktop) from the Snipping Tool, Print Screen or any copied image: it becomes a one-page
+  PDF named "Pasted yyyy-MM-dd HH-mm-ss.pdf" in the open folder, placed on a letter sheet (portrait or landscape to suit
+  the picture, half-inch margins, never enlarged), so it stacks, prints, annotates and searches like a scan. In the viewer,
+  Ctrl+V inserts the picture as a new page after the current one. Until now Paste accepted only files.
+- The viewer's status bar has a zoom slider (25% to 400%, marks at 25, 50, 100, 200 and 400) with minus and plus beside
+  the percentage. Ctrl+mouse wheel, Ctrl+plus/minus and Fit width / Fit page work as before.
+- The installer's finish screen now says that the shortcut is on the desktop and in the Start menu, and how to pin
+  ScanDesk to the taskbar (an installer cannot do that on Windows 10/11).
