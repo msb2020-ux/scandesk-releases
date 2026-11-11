@@ -2,7 +2,7 @@
 
 ScanDesk Desktop replaces PaperPort in a small medical office: scan, print-to-ScanDesk, file, find, clean up, annotate and send documents. Everything stays on your PC; nothing is uploaded. Source code is private; this page holds the installers.
 
-**Current version: 0.12.11** (released 2026-11-10)
+**Current version: 0.12.12** (released 2026-11-11)
 
 ## Install (Windows 10/11, 64-bit)
 
@@ -16,10 +16,49 @@ Help > Copy logs for support writes the logs (file names and actions only, never
 
 ## Release notes
 
-## 0.12.11 - Failed .max files in one folder (2026-11-10)
-- After a .max conversion run, a "Collect failed files" button moves the files PaperPort's converter could not read into one
-  visible folder, "PaperPort files that did not convert", at the top of the folder you converted, keeping their subfolder
-  names, with a "where these came from.txt" listing the original places. It opens in Explorer. Nothing is deleted, nothing
-  moves until you click, and the collected files are not offered again (move one back out to retry it). The run itself
-  already continued past failures; the two left in a Home folder of 6,723 were the reason for this.
-- The failure text now quotes the converter's own reason ("Failed, file could not be converted!") instead of its sign-off line.
+## 0.12.12 - Code review fixes: private folders, redactions, updater (2026-11-11)
+A full read of the code found 43 defects in paths the tests did not cover (docs/review-2026-11-11.md). 40 are fixed here.
+None was caused by last week's changes. The viewer and main-window fixes have not been checked on screen yet.
+
+Private folders (Personal Vault)
+- A vault that was linked on 0.12.0 or later was not private until the box was ticked by hand. It is private from the
+  moment it is linked now, and a vault linked earlier is made private once at the first start of this version; what the
+  index held of it is dropped. (If you had unticked Private on purpose, untick it again.)
+- Renaming a private folder no longer makes it public. A private folder that also sits inside another linked folder is
+  private from both directions.
+- Moving a document into a private folder takes its text, thumbnail and suggestions out of the index. Tags and what the
+  assistant learns are not kept for private documents, and their names no longer appear in the log file.
+- Printing to ScanDesk or scanning while a locked vault is the open folder never creates a folder where the vault
+  belongs: the print lands at the top level of the desktop, the scan is refused with a message.
+
+Redaction and the viewer
+- A redaction (or a mark on an image page, or a typed form entry) that has not been applied yet now follows its page
+  when pages are deleted, moved or inserted. Before, it could be burned into the neighbouring page.
+- Print and Email refuse while a redaction, mark or form entry is not applied yet; the page used to go out without it.
+- Flipping quickly between pages no longer leaves the picture of one page on screen while the page counter, Delete,
+  Rotate and Redact are on another.
+- Typed form entries count as unsaved changes: Save keeps them, closing asks.
+- Exiting ScanDesk with unsaved changes in the viewer: Cancel now really cancels (it closed anyway and discarded the edits).
+- Pages dragged in from another open document are copied at once; the right page is saved whatever happens to the other.
+- Marks and form text on pages turned 90 or 270 degrees land where they were drawn; the text layer of sideways scans is right.
+
+Documents
+- Deleting from a network share, a removable drive or a file too big for the Recycle Bin: Windows now asks before
+  deleting for good. It used to be permanent without a word.
+- Saving a rotated or cleaned JPEG, BMP, GIF or TIFF keeps the format (PNG data was written under the old name);
+  multi-page TIFFs can be saved.
+- Clean up > Despeckle no longer removes periods, decimal points, colons and i-dots ("2.5 mg" could become "2 5 mg").
+  A small mark with print right next to it is left alone; dust that touches the print therefore stays.
+- Unstacking every page of a document in a linked folder works. Bringing in a PaperPort folder by copying no longer
+  copies into a linked folder of the same name.
+- If links.json, tags.json or settings.json cannot be read (antivirus, power loss), the file is kept aside as
+  "name.unreadable-<time>" instead of being overwritten with an empty one.
+- Previous versions lists only the document's own versions. The reader adds the text layer to a page once. Image stamps
+  no longer vanish. Tags follow a document through a move with a name clash and through Cut and Paste. The naming
+  dialog keeps ".pdf" when the name has a period in it. A PDF whose password was removed opens at once.
+
+Updates
+- The updater now requires the checksum, accepts only https or a folder, has Windows verify that the signature covers
+  the file, and insists on the very certificate that signed the installed copy. A package signed with any other
+  certificate is refused, so after a certificate change each PC needs one manual install.
+- Help > Copy logs for support includes all three installer logs.
