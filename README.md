@@ -2,7 +2,7 @@
 
 ScanDesk Desktop replaces PaperPort in a small medical office: scan, print-to-ScanDesk, file, find, clean up, annotate and send documents. Everything stays on your PC; nothing is uploaded. Source code is private; this page holds the installers.
 
-**Current version: 0.12.12** (released 2026-11-11)
+**Current version: 0.14.1** (released 2026-11-14)
 
 ## Install (Windows 10/11, 64-bit)
 
@@ -16,49 +16,55 @@ Help > Copy logs for support writes the logs (file names and actions only, never
 
 ## Release notes
 
-## 0.12.12 - Code review fixes: private folders, redactions, updater (2026-11-11)
-A full read of the code found 43 defects in paths the tests did not cover (docs/review-2026-11-11.md). 40 are fixed here.
-None was caused by last week's changes. The viewer and main-window fixes have not been checked on screen yet.
+## 0.14.1 - Office e-mail buttons, a right-click e-mail section, and one update question per version (2026-11-14)
+One update that also carries everything listed under 0.13.0 below (0.13.0 and 0.14.0 were never released on their own).
 
-Private folders (Personal Vault)
-- A vault that was linked on 0.12.0 or later was not private until the box was ticked by hand. It is private from the
-  moment it is linked now, and a vault linked earlier is made private once at the first start of this version; what the
-  index held of it is dropped. (If you had unticked Private on purpose, untick it again.)
-- Renaming a private folder no longer makes it public. A private folder that also sits inside another linked folder is
-  private from both directions.
-- Moving a document into a private folder takes its text, thumbnail and suggestions out of the index. Tags and what the
-  assistant learns are not kept for private documents, and their names no longer appear in the log file.
-- Printing to ScanDesk or scanning while a locked vault is the open folder never creates a folder where the vault
-  belongs: the print lands at the top level of the desktop, the scan is refused with a message.
+New: e-mail buttons on the Send To bar
+- **The office's two standard e-mail buttons are built in.** Every PC shows them after this update: the recipient's
+  logo beside your mail program's icon, with the To and CC addresses already set. Nobody has to set them up, and when
+  an address changes the next update changes it on every PC.
+- **Drop documents on a button, or select them and click it:** the new message opens at once with each document
+  attached and the addresses filled in. You read it and press Send yourself; ScanDesk never sends anything.
+- Hold **Shift** while you drop or click to get the box with *Merge into one PDF* and *Password-protect* first. The
+  plain Email button still shows that box every time.
+- **Buttons of your own:** Send To bar > *Add... > Add e-mail button*: a name, To and CC addresses (several, separated
+  by a semicolon) and, if you like, a picture such as a logo. Right-click an e-mail button > *Set addresses and
+  picture...* to change it. Your own buttons belong to this PC and this Windows user.
+- An office button's addresses cannot be changed on a PC; a picture of your own can replace its logo. A PC that does
+  not want an office button can remove it; *Add... > Reset to the default buttons* brings it back. Removing a button
+  with addresses, and Reset when you have buttons of your own, ask first.
 
-Redaction and the viewer
-- A redaction (or a mark on an image page, or a typed form entry) that has not been applied yet now follows its page
-  when pages are deleted, moved or inserted. Before, it could be burned into the neighbouring page.
-- Print and Email refuse while a redaction, mark or form entry is not applied yet; the page used to go out without it.
-- Flipping quickly between pages no longer leaves the picture of one page on screen while the page counter, Delete,
-  Rotate and Redact are on another.
-- Typed form entries count as unsaved changes: Save keeps them, closing asks.
-- Exiting ScanDesk with unsaved changes in the viewer: Cancel now really cancels (it closed anyway and discarded the edits).
-- Pages dragged in from another open document are copied at once; the right page is saved whatever happens to the other.
-- Marks and form text on pages turned 90 or 270 degrees land where they were drawn; the text layer of sideways scans is right.
+New: right-click a document
+- An **e-mail section** right under *Rotate Left / Rotate Right*: *Email...*, then one *Email to ...* line for every
+  e-mail button that has addresses. Such a line opens the message at once.
+- The other commands (clean up, password, print, merge, split, stacks, versions, properties) are behind **Show more**.
+  Click it and they open in place; the menu remembers that, also after a restart, until you click *Show less*.
 
-Documents
-- Deleting from a network share, a removable drive or a file too big for the Recycle Bin: Windows now asks before
-  deleting for good. It used to be permanent without a word.
-- Saving a rotated or cleaned JPEG, BMP, GIF or TIFF keeps the format (PNG data was written under the old name);
-  multi-page TIFFs can be saved.
-- Clean up > Despeckle no longer removes periods, decimal points, colons and i-dots ("2.5 mg" could become "2 5 mg").
-  A small mark with print right next to it is left alone; dust that touches the print therefore stays.
-- Unstacking every page of a document in a linked folder works. Bringing in a PaperPort folder by copying no longer
-  copies into a linked folder of the same name.
-- If links.json, tags.json or settings.json cannot be read (antivirus, power loss), the file is kept aside as
-  "name.unreadable-<time>" instead of being overwritten with an empty one.
-- Previous versions lists only the document's own versions. The reader adds the text layer to a page once. Image stamps
-  no longer vanish. Tags follow a document through a move with a name clash and through Cut and Paste. The naming
-  dialog keeps ".pdf" when the name has a period in it. A PDF whose password was removed opens at once.
+Email works differently underneath
+- The Email button, the e-mail buttons and *Help > Send feedback* can no longer freeze ScanDesk: the mail program is
+  asked in the background.
+- Classic Outlook is asked directly, as its own program, to open the message. Other mail programs (Thunderbird,
+  eM Client) are reached as before.
+- If Outlook has not answered after 30 seconds, ScanDesk says so, says that nothing was sent, and keeps working; the
+  message opens as soon as Outlook answers. If Outlook refuses (a dialog box is open in Outlook), ScanDesk gives the
+  reason and shows copies of the documents to drag into a message.
 
 Updates
-- The updater now requires the checksum, accepts only https or a folder, has Windows verify that the signature covers
-  the file, and insists on the very certificate that signed the installed copy. A package signed with any other
-  certificate is refused, so after a certificate change each PC needs one manual install.
-- Help > Copy logs for support includes all three installer logs.
+- The "update is ready" question at start is asked **once per version**. After *Later* it does not come back at the
+  next start; the status bar mentions the update, and *Help > Check for updates* names the version and installs it
+  whenever it suits you. This begins with the update after this one.
+
+Fixed
+- **One drag off the desktop could count 32 times** (Auto Arrange off): the extra drags were dropped at once wherever
+  the pointer was, onto a Send To button, a folder or another program. A drag now starts once.
+- The same documents sent to the same Send To button twice within two seconds are sent once.
+- While you drag documents across a Send To button, its highlight no longer flickers.
+- Second pane: the Delete key offered to delete the document selected in the FIRST pane. It now deletes what is
+  selected in the second pane; F2 and Ctrl+A, C, X, V no longer act on the first pane from there.
+- Viewer: after paging with Page Down, the arrows or the mouse wheel, *Delete page* and *Rotate* acted on the thumbnail
+  that was still highlighted, not on the page on screen. The highlight now follows the page on screen.
+- Saving (Rotate, the viewer's Save) tries again for about a second when OneDrive or another program holds the file.
+
+Under the hood
+- ScanDesk now runs on .NET 10, supported until November 2028. Nothing has to be installed: the installer carries it.
+- 336 automated tests pass.
