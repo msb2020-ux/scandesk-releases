@@ -2,7 +2,7 @@
 
 ScanDesk Desktop replaces PaperPort in a small medical office: scan, print-to-ScanDesk, file, find, clean up, annotate and send documents. Everything stays on your PC; nothing is uploaded. Source code is private; this page holds the installers.
 
-**Current version: 0.14.1** (released 2026-11-14)
+**Current version: 0.14.1** (released 2026-11-15)
 
 ## Install (Windows 10/11, 64-bit)
 
