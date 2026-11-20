@@ -2,7 +2,7 @@
 
 ScanDesk Desktop replaces PaperPort in a small medical office: scan, print-to-ScanDesk, file, find, clean up, annotate and send documents. Everything stays on your PC; nothing is uploaded. Source code is private; this page holds the installers.
 
-**Current version: 0.14.7** (released 2026-11-18)
+**Current version: 0.14.8** (released 2026-11-20)
 
 ## Install (Windows 10/11, 64-bit)
 
@@ -16,46 +16,48 @@ Help > Copy logs for support writes the logs (file names and actions only, never
 
 ## Release notes
 
-## 0.14.7 - Dropping documents on one another stacks them into one multi-page PDF; an empty feeder is reported; a new document shows its preview at once (2026-11-18)
-One update; 0.14.2 to 0.14.6 were trial builds and were never released on their own.
+## 0.14.8 - A print window with a preview; documents open and page faster (2026-11-20)
 
-Stacking
-- **Dropping a document on another one now stacks them, into ONE multi-page PDF, as PaperPort does.** With Auto Arrange
-  off (the usual setting) a drop did nothing useful before: the icon was only laid over the other one. Now the document
-  under the pointer is marked while you drag, and letting go joins the two.
-- **The result pages and opens like any multi-page PDF.** Its thumbnail has the page arrows and the page count, a
-  double-click opens it in the viewer, and it goes out by e-mail as one attachment. In the viewer the bookmarks name
-  the documents that went into it.
-- **What you drop lies on top.** Its pages come first; the pages of the document you dropped on follow. Drop more on it
-  later and those go on top again.
-- **Several documents dropped together** go on top in the order the desktop shows them, row by row from the top left.
-- **It stays where you dropped.** The result keeps the name and the place of the document you dropped on. A picture you
-  drop on becomes a PDF of the same name.
-- **PDFs and pictures can be stacked.** For any other file (a Word document, a text file) and for a password-protected
-  PDF, ScanDesk says which file it is and changes nothing.
-- **Nothing is lost.** The single files go to the Recycle Bin, and the document you dropped on keeps its previous state
-  under *Versions*. Tags of the single documents move to the stacked one.
-- ***Unstack*** takes a stacked document apart again, one document per page.
-- **Stacking answers at once.** What you dropped leaves the desktop immediately and the document you dropped on shows
-  "Stacking..." until it is ready, usually well under a second. The window stays usable meanwhile, and you can drop
-  the next document right away. Moving the single files to the Recycle Bin, which can take seconds in a OneDrive
-  folder, happens afterwards in the background.
-- Piles made by an earlier version (shown with an item count instead of pages) still open as a list. Drop something
-  on one, or use *Merge stack to one PDF*, and it becomes one document in its place.
+Printing
+- **Print now opens ScanDesk's own print window, and it shows a preview.** The Windows print dialog cannot show one for
+  a program of this kind (it says "This app doesn't support print preview"), so ScanDesk now draws the preview itself,
+  with the same code that draws the printed page: what you see is what comes out, margins included. Arrows, Page Up /
+  Page Down and the mouse wheel page through what will be printed.
+- **The choices that matter are in the window:** the printer (the one used last is offered first), copies, the pages
+  (all, the current page, or ranges such as `1-3, 5` or `8-`), the paper, color or black and white, and two-sided
+  printing where the printer can do it. The line at the bottom says how many sheets of paper that makes.
+- **Orientation is automatic for every page.** A landscape page is turned to lie along the sheet; before, it was
+  printed small across an upright sheet. Portrait or landscape can still be forced.
+- **Size: "Fit to the paper" or "Actual size".** Fit uses the area the printer can reach, so nothing is cut off at the
+  edge (before, pages were fitted to the whole sheet and the outermost few millimetres could be lost). Actual size
+  prints at 100% in the middle of the sheet.
+- **Printer properties** opens the printer's own settings (trays, stapling, toner saving). **Use the Windows print
+  dialog instead** is still there, one click away, and is used by itself if the print window cannot open.
+- **The window stays in use while a document prints.** The pages are sent in the background and the status bar says
+  "Printing page 3 of 12..." and then "Sent 12 pages to ...". Each page also goes to the printer faster.
+- **Print is always in a document's right-click menu**, above *Show more*.
+- Fixed: printing from the viewer wrote "printed" into the audit trail even when the dialog was cancelled.
 
-Fixed
-- **Scanning with an empty feeder.** ScanDesk now asks the scanner whether paper is loaded before it starts. If the
-  feeder is empty it says so ("The feeder is empty. Put the pages in the scanner and scan again.") and stops.
-  Before, *Scan now* could sit at "Scanning..." while the scanner's own software waited in a window of its own.
-  Scanners that cannot tell whether paper is loaded scan as before.
-- When a scan cannot start (scanner switched off, in use by another program, driver will not open), ScanDesk now
-  shows the reason instead of "Scan host ended unexpectedly".
-- A document that had just arrived on the desktop, printed to ScanDesk or scanned, could stay without its preview
-  picture until you flipped a page with the arrows on it. It now shows its preview by itself.
-- The same could leave other documents in a folder without a preview after the folder was read again; they now get
-  their picture too.
-- A folder named `.scandesk` could show in the folder tree. It is ScanDesk's own storage inside a library and is
-  never shown now, also when a sync program has taken away its hidden flag.
-- With one document in a folder and that one selected, the status bar said "1 items, 1 selected". It says "1 item".
-- An empty feeder is noted in the log as one plain line, no longer as an error with a full trace.
-- 388 automated tests pass.
+Speed
+- **A document opens with its first page first.** The viewer used to draw the pictures of the page strip ahead of the
+  page itself, and packed and unpacked every page on the way. Measured on a 40-page scan of 68 MB: the first page
+  appeared after about 1.5 seconds and now appears after 0.2 to 0.3; turning to the next page took about 0.4 seconds
+  and is now immediate, because the next page and the one before are drawn ahead.
+- **A document is read from disk once while you look at it**, not once for every page and every picture of the strip.
+  This matters most for documents in OneDrive or on a share.
+- **ScanDesk starts sooner.** The search-by-meaning model and the check of the program files are loaded after the
+  window is there instead of before it. Measured: the two took 0.3 seconds of an ordinary start (now about 1.3
+  seconds to the window on the test PC) and 2.7 seconds of a first start, when nothing is in memory yet.
+- **Deleting, moving or stacking a document no longer makes ScanDesk read the whole folder tree again.** It did, on
+  the window's own thread, after every single file that went away. Making or removing a folder now re-reads only the
+  folder it happened in.
+- **A new scan or print adds one card to the open folder.** The whole folder used to be emptied and filled again for
+  one new document, with every picture unpacked again.
+- Opening a folder no longer asks the disk two questions per document to find online-only OneDrive files (the folder
+  listing already knows), and the folder tree asks "is there a subfolder?" instead of listing them all.
+- The background text reader steps aside while pictures of the open folder or a page in the viewer are being drawn,
+  and reads a document once instead of once per page.
+- The log now says how long the start, a slow folder and every opened document took (lines marked `[speed]`: counts
+  and milliseconds, never a name), so a PC that feels slow can be explained from *Help > Copy logs for support*.
+
+434 automated tests pass.
